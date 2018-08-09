@@ -1,12 +1,18 @@
+import java.util.Calendar;
+
 public class Space {
 	final private int spotLocation;
 	final private int carSize;//carSize 0-small, 1-medium, 2-large
 	final private int level;//assume levels are 1,2,3
+	private boolean occupied;
+	final private Calendar enterTime;
 		
-	public Space(int spot, int size, int level) {
+	public Space(int spot, int size, int level, boolean occupied) {
 		this.spotLocation = spot;
 		this.carSize = size;//this term is the space for improvement
 		this.level = level;
+		this.occupied = occupied;
+		this.enterTime = Calendar.getInstance();
 	}
 	
 	public int getSize() {
@@ -19,6 +25,24 @@ public class Space {
 	
 	public int getLevel() {
 		return this.level;
+	}
+	
+	public boolean getCoverStatus() { //get status
+		return this.occupied;
+	}
+	
+	public boolean setCoverStatus() { //reverse status
+		return this.occupied  = !this.occupied;
+	}
+	
+	public void setEnterTime() {
+		enterTime.set(Calendar.HOUR_OF_DAY, enterTime.get(Calendar.HOUR_OF_DAY));
+		enterTime.set(Calendar.MINUTE, enterTime.get(Calendar.MINUTE));
+		enterTime.set(Calendar.SECOND, enterTime.get(Calendar.SECOND));
+	}
+	
+	public Calendar getEnterTime() {
+		return this.enterTime;
 	}
 	
 	@Override

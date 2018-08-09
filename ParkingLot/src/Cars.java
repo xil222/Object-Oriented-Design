@@ -1,4 +1,3 @@
-
 public class Cars {
 
 	final private int size;
@@ -15,6 +14,5 @@ public class Cars {
 	
 	public int getLicense() {
 		 return this.license.hashCode();
-	}
-	
+	}	
 }
