@@ -3,13 +3,13 @@ import java.util.*;
 
 public class GraphNode {	
 	public int key;
-	public int weight;
-	public List<GraphNode> neighbors;
-	//list neighbors are storing their neighbor nodes, and distance to them 
+	public int weight; //weight stands for initial weight
+	public List<Edge> neighbors;
+	//list neighbors are storing their neigh	bor nodes, and distance to them 
 	public GraphNode (int key, int weight) {
 		this.key = key;
 		this.weight = weight;
-		this.neighbors = new ArrayList<GraphNode>(); 
+		this.neighbors = new ArrayList<Edge>(); 
 	}
 	
 	@Override
@@ -28,5 +28,15 @@ public class GraphNode {
 	public int hashCode() {
 		return key * 101;
 	}
+	
+	
+	public void updateWeight(int weight) {
+		this.weight = weight;
+	}
+	
+	public int getWeight() {
+		return this.weight;
+	}
+	//may need a function update the weight
 	
 }

@@ -31,8 +31,8 @@ public class Space {
 		return this.occupied;
 	}
 	
-	public boolean setCoverStatus() { //reverse status
-		return this.occupied  = !this.occupied;
+	public void setCoverStatus() { //reverse status
+		this.occupied  = !this.occupied;
 	}
 	
 	public void setEnterTime() {

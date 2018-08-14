@@ -91,8 +91,7 @@ public class ParkingLot{
 	//remove space from EmptySpace 
 	//add space into the CoveredSpace
 	public boolean addVehcicle(Cars car) {
-		int carSize = car.getSize();
-			
+		int carSize = car.getSize();			
 		if (carSize == 0) {
 			if (smallEmptySpace.isEmpty()) {
 				System.out.println("Spaces for small cars are full");
@@ -189,13 +188,11 @@ public class ParkingLot{
 		result.set(Calendar.SECOND, leave.get(Calendar.SECOND) - enter.get(Calendar.SECOND));
 		
 		int totalSeconds = result.get(Calendar.HOUR_OF_DAY) * 3600 + result.get(Calendar.MINUTE) * 60 + result.get(Calendar.SECOND);
-		
 		if (totalSeconds <= 18000) {
 			return baseCost;
 		} else {
 			double hours = (totalSeconds - 18000)/3600.0;
 			int totalCost = baseCost + 3 * (int)Math.ceil(hours);
-			
 			return totalCost;
 		}
 		
