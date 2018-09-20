@@ -3,6 +3,7 @@ import java.util.concurrent.*;
 
 public class MyHashMap<K, V> {
 	
+	//no need for synchronize as not providing to others
 	public static class Entry<K, V> { //see whats going on without <K, V>
 		final K key;
 		V value;
@@ -46,26 +47,26 @@ public class MyHashMap<K, V> {
 		this.size = 0;
 	}
 	
-	public int size() {
+	public synchronized int size() {
 		return this.size;
 	}
 	
-	public boolean isEmpty() {
+	public synchronized boolean isEmpty() {
 		return this.size == 0? true: false;
 	}
 	
-	public void clear() {
+	public synchronized void clear() {
 		Arrays.fill(myArray, null);
 	}
 	
-	public int hash(K key) {
+	private int hash(K key) {
 		if (key == null) {
 			return 0; //
 		}
 		return key.hashCode() & 0x7FFFFFFF; 
 	}
 	
-	public int getIndex(int hashValue) {
+	private int getIndex(int hashValue) {
 		return hashValue % myArray.length;
 	}
 	
@@ -108,7 +109,7 @@ public class MyHashMap<K, V> {
 		return false;
 	}
 	
-	public boolean containsValue(V value){
+	public synchronized boolean containsValue(V value){
 		if (this.isEmpty()) {
 			return false;
 		}
@@ -152,12 +153,12 @@ public class MyHashMap<K, V> {
 		return null;
 	}
 	
-	public boolean needRehashing() {
+	private boolean needRehashing() {
 		float ratio = (this.size + 0.0f) / myArray.length;
 		return ratio >= loadFactor;
 	}
 	
-	public synchronized void rehashing() {
+	private void rehashing() {
 		//System.out.println(myArray.length);
 		int newCapacity = myArray.length * 2;
 		Entry<K, V>[] tempArray = myArray;
