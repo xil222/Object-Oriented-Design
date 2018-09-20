@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.concurrent.*;
 
 public class MyHashMap<K, V> {
 	
@@ -77,7 +78,7 @@ public class MyHashMap<K, V> {
 		return v1 == v2 || (v1 != null && v1.equals(v2));
 	}
 	
-	public V get(K key) {
+	public synchronized V get(K key) {
 		//if key is null return null at most, what need is only a value
 		int index = getIndex(hash(key));
 		Entry<K,V> currEntry = myArray[index];
@@ -91,7 +92,7 @@ public class MyHashMap<K, V> {
 		return null;
 	}
 	
-	public boolean containsKey(K key){
+	public synchronized boolean containsKey(K key){
 		if (this.isEmpty()) {
 			return false;
 		}
@@ -125,7 +126,7 @@ public class MyHashMap<K, V> {
 	}
 	
 	//return the original value of specific key
-	public V put(K key, V value){
+	public synchronized V put(K key, V value){
 		
 		int index = getIndex(hash(key));
 		Entry<K, V> currEntry = myArray[index];
@@ -156,7 +157,7 @@ public class MyHashMap<K, V> {
 		return ratio >= loadFactor;
 	}
 	
-	public void rehashing() {
+	public synchronized void rehashing() {
 		//System.out.println(myArray.length);
 		int newCapacity = myArray.length * 2;
 		Entry<K, V>[] tempArray = myArray;
@@ -174,7 +175,7 @@ public class MyHashMap<K, V> {
 		}
 	}
 	
-	public V remove(K key) {
+	public synchronized V remove(K key) {
 		if (isEmpty()) {
 			return null;
 		}
